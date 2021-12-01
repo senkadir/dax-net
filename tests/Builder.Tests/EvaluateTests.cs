@@ -2,7 +2,7 @@ using Xunit;
 
 namespace Builder.Tests
 {
-    public class UnitTest1
+    public class EvaluateTests
     {
         [Fact]
         public void Evaluate_With_Multiple_Orders_Test()
@@ -41,7 +41,6 @@ namespace Builder.Tests
             string expectedQuery = $"EVALUATE('TestTable1') ORDER BY 'TestTable1'[Col1] ASC, 'TestTable1'[Col2 With Space] DESC START AT 50, \"50\"";
 
             Assert.Equal(expectedQuery, actualQuery, ignoreWhiteSpaceDifferences: true);
-
         }
     }
 }
