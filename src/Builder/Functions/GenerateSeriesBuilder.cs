@@ -29,6 +29,22 @@ namespace Builder
             return this;
         }
 
+        public GenerateSeriesBuilder Column(TimeSpan start, TimeSpan end, TimeSpan increment = default)
+        {
+            _generateSeries.Columns.Add($"TIME ({start.Hours}, {start.Minutes}, {start.Seconds})");
+
+            _generateSeries.Columns.Add($"TIME ({end.Hours}, {end.Minutes}, {end.Seconds})");
+
+            if (increment == default)
+            {
+                increment = TimeSpan.FromHours(1);
+            }
+
+            _generateSeries.Columns.Add($"TIME ({increment.Hours}, {increment.Minutes}, {increment.Seconds})");
+
+            return this;
+        }
+
         public GenerateSeries Build()
         {
             return _generateSeries;
