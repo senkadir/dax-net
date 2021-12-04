@@ -4,17 +4,22 @@ using System.Text;
 
 namespace Builder
 {
-    public class SummarizeColumns : Function
+    public class GenerateSeries : Function
     {
         public List<string> Columns { get; set; }
 
+        public GenerateSeries()
+        {
+            Columns = new();
+        }
+
         public override StringBuilder Generate(StringBuilder builder)
         {
-            builder.AppendLine("SUMMARIZECOLUMNS (");
+            builder.AppendLine($"GENERATESERIES ( ");
 
             builder.AppendJoin($", {Environment.NewLine}", Columns);
 
-            builder.AppendLine(")");
+            builder.AppendLine($" )");
 
             return builder;
         }
