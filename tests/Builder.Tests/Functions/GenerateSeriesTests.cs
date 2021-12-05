@@ -61,5 +61,32 @@ namespace Builder.Tests.Functions
 
             Assert.Equal(expectedQuery, actualQuery, ignoreWhiteSpaceDifferences: true);
         }
+
+        [Fact]
+        public void Evaluate_With_Function_GenerateSeries_With_SelectColumns_Test()
+        {
+            QueryBuilder builder = new();
+
+            string actualQuery = builder.Evaluate(x =>
+            {
+                x.Functions(f => f.SelectColumns(c =>
+                {
+                    c.Table(ff =>
+                    {
+                        ff.GenerateSeries(g =>
+                        {
+                            g.Column(1, 10);
+                        });
+                    });
+
+                    c.Column("Time");
+                }));
+            })
+                .Build();
+
+            string expectedQuery = $@"EVALUATE GENERATESERIES ( TIME ({TimeSpan.FromHours(1).Hours}, {TimeSpan.FromHours(1).Minutes}, {TimeSpan.FromHours(1).Seconds}), TIME ({TimeSpan.FromHours(3).Hours}, {TimeSpan.FromHours(1).Minutes}, {TimeSpan.FromHours(1).Seconds}), TIME ({TimeSpan.FromHours(1).Hours}, {TimeSpan.FromHours(0).Minutes}, {TimeSpan.FromHours(0).Seconds}) )";
+
+            Assert.Equal(expectedQuery, actualQuery, ignoreWhiteSpaceDifferences: true);
+        }
     }
 }

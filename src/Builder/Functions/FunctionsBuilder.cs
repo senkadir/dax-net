@@ -34,6 +34,17 @@ namespace Builder
             return this;
         }
 
+        public FunctionsBuilder SelectColumns(Action<SelectColumnsBuilder> selectColumnsBuilder)
+        {
+            SelectColumnsBuilder selectColumnsBuilderInner = new();
+
+            selectColumnsBuilder(selectColumnsBuilderInner);
+
+            _function.Add(selectColumnsBuilderInner.Build());
+
+            return this;
+        }
+
         public List<Function> Build()
         {
             return _function;
