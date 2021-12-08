@@ -61,7 +61,8 @@ namespace Builder
 
             query.Evaluates.ForEach(x => x.Generate(builder));
 
-            return builder.ToString();
+            return builder.Replace("'", "\"")
+                          .ToString();
         }
 
         public string BuildRaw()

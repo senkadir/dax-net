@@ -43,6 +43,13 @@ namespace Builder
             return this;
         }
 
+        public SelectColumnsBuilder Column(string columnName, string expression)
+        {
+            Column($"'{columnName}', {expression}");
+
+            return this;
+        }
+
         public SelectColumns Build()
         {
             return _selectColumns;

@@ -75,16 +75,17 @@ namespace Builder.Tests.Functions
                     {
                         ff.GenerateSeries(g =>
                         {
-                            g.Column(1, 10);
+                            g.Column(DateTime.Now, DateTime.Now.AddDays(10));
                         });
                     });
 
-                    c.Column("Time");
+                    c.Column("Time", "FORMAT ( [Value], 'YYYY:MM:dd' )");
                 }));
             })
-                .Build();
+            .BuildRaw();
 
-            string expectedQuery = $@"EVALUATE GENERATESERIES ( TIME ({TimeSpan.FromHours(1).Hours}, {TimeSpan.FromHours(1).Minutes}, {TimeSpan.FromHours(1).Seconds}), TIME ({TimeSpan.FromHours(3).Hours}, {TimeSpan.FromHours(1).Minutes}, {TimeSpan.FromHours(1).Seconds}), TIME ({TimeSpan.FromHours(1).Hours}, {TimeSpan.FromHours(0).Minutes}, {TimeSpan.FromHours(0).Seconds}) )";
+            string expectedQuery = $@"EVALUATE SELECTCOLUMNS ( GENERATESERIES(DATE (2021, 12, 8), DATE (2021, 12, 18), 1),'Time', FORMAT ( [Value], 'YYYY:MM:dd' ))"
+                                    .Replace("'", "\"");
 
             Assert.Equal(expectedQuery, actualQuery, ignoreWhiteSpaceDifferences: true);
         }

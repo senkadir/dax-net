@@ -15,11 +15,12 @@ namespace Builder
 
         public override StringBuilder Generate(StringBuilder builder)
         {
-            builder.AppendLine($"GENERATESERIES ( ");
+            builder.AppendLine($"GENERATESERIES");
+            builder.AppendLine($"(");
 
-            builder.AppendJoin($", {Environment.NewLine}", Columns);
+            builder.AppendLine(string.Join($", {Environment.NewLine}", Columns));
 
-            builder.AppendLine($" )");
+            builder.AppendLine($")");
 
             return builder;
         }

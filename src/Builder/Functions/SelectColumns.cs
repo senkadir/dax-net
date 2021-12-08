@@ -19,11 +19,11 @@ namespace Builder
         {
             builder.AppendLine("SELECTCOLUMNS ( ");
 
-            builder.AppendLine($"{Table}");
+            builder.AppendLine($"{Table.TrimEnd(Environment.NewLine.ToCharArray())},");
 
             builder.AppendJoin($", {Environment.NewLine}", Columns);
 
-            builder.AppendLine(" )");
+            builder.AppendLine($"{Environment.NewLine})");
 
             return builder;
         }
