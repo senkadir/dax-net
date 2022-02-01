@@ -1,5 +1,5 @@
 # dax-net
-This library's focuses to create DAX queries with C# as fluent syntax.
+Create DAX queries with C# with fluent syntax.
 
           QueryBuilder builder = new();
             string actualQuery = builder.Evaluate(x =>
