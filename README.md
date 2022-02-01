@@ -1,5 +1,5 @@
 # dax-net
-Create DAX queries with C# with fluent syntax.
+Create DAX queries with C# fluent syntax.
 
           QueryBuilder builder = new();
             string actualQuery = builder.Evaluate(x =>
